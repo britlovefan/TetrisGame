@@ -12,4 +12,5 @@ public class BadBrain extends DefaultBrain {
 		return(10000 - score);
 	}
 	add
+	publc
 }
