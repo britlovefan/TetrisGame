@@ -11,5 +11,4 @@ public class BadBrain extends DefaultBrain {
 		double score = super.rateBoard(board);
 		return(10000 - score);
 	}
-	System
 }
