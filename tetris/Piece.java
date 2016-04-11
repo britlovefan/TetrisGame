@@ -90,6 +90,12 @@ public class Piece {
 	public Piece computeNextRotation() {
 		TPoint[] rotate_Body=new TPoint[body.length];
 		Piece rotate_Piece=new Piece(rotate_Body);
+		for(int i=0;i<body.length;i++){
+			//get the original x and y of the former 
+			int x=body[i].x;
+			int y=body[i].y;
+			rotate_Body[i]=new TPoint(width-y,x);
+		}
 		return rotate_Piece; // YOUR CODE HERE
 	}
 
@@ -121,8 +127,7 @@ public class Piece {
 		// (null will be false)
 		if (!(obj instanceof Piece)) return false;
 		Piece other = (Piece)obj;
-		
-		// YOUR CODE HERE
+		//YOUR CODE HERE
 		return true;
 	}
 
@@ -189,9 +194,14 @@ public class Piece {
 	 to the first piece.
 	*/
 	private static Piece makeFastRotations(Piece root) {
-		
-		
-		return null; // YOUR CODE HERE
+		//The method makeFastRotations() should start with a single piece, 
+		//and create and wire together the whole list of its rotations around the given piece
+		root.next=root.computeNextRotation();
+		while(!root.next.equals(root)){
+			root.next=root.computeNextRotation();
+			root=root.next;
+		}
+		return root; // YOUR CODE HERE
 	}
 	
 	
