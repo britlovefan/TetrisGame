@@ -35,11 +35,11 @@ public class Piece {
 	 Makes its own copy of the array and the TPoints inside it.
 	*/
 	public Piece(TPoint[] points) {
+       body=points;
 		// YOUR CODE HERE
 	}
 	
 
-	
 	
 	/**
 	 * Alternate constructor, takes a String with the x,y body points
@@ -88,7 +88,9 @@ public class Piece {
 	 rotated from the receiver.
 	 */
 	public Piece computeNextRotation() {
-		return null; // YOUR CODE HERE
+		TPoint[] rotate_Body=new TPoint[body.length];
+		Piece rotate_Piece=new Piece(rotate_Body);
+		return rotate_Piece; // YOUR CODE HERE
 	}
 
 	/**
@@ -187,6 +189,8 @@ public class Piece {
 	 to the first piece.
 	*/
 	private static Piece makeFastRotations(Piece root) {
+		
+		
 		return null; // YOUR CODE HERE
 	}
 	
@@ -204,14 +208,12 @@ public class Piece {
 			while(tok.hasMoreTokens()) {
 				int x = Integer.parseInt(tok.nextToken());
 				int y = Integer.parseInt(tok.nextToken());
-				
 				points.add(new TPoint(x, y));
 			}
 		}
 		catch (NumberFormatException e) {
 			throw new RuntimeException("Could not parse x,y string:" + string);
 		}
-		
 		// Make an array out of the collection
 		TPoint[] array = points.toArray(new TPoint[0]);
 		return array;
