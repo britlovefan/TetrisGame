@@ -36,7 +36,6 @@ public class Piece {
 	*/
 	public Piece(TPoint[] points) {
        body=points;
-		// YOUR CODE HERE
 	}
 	
 
@@ -119,15 +118,23 @@ public class Piece {
 	 in the same order in the bodies. Used internally to detect
 	 if two rotations are effectively the same.
 	*/
-	public boolean equals(Object obj) {
+	public boolean equals(Object obj) { 
 		// standard equals() technique 1
 		if (obj == this) return true;
-		
 		// standard equals() technique 2
 		// (null will be false)
 		if (!(obj instanceof Piece)) return false;
-		Piece other = (Piece)obj;
-		//YOUR CODE HERE
+		Piece other = (Piece)obj;//construct a Piece object from obj
+		if(this.body.length!=other.body.length){
+			return false;
+		}
+		Set<TPoint> set = new HashSet<TPoint>(Arrays.asList(this.body));
+		for(int i=0;i<this.body.length;i++){
+			if(!set.contains(other.body[i])){
+				return false;
+			}
+		}
+		//Two Pieces are equal if they contain the same set of TPoint
 		return true;
 	}
 
