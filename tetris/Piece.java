@@ -181,8 +181,6 @@ public class Piece {
 				makeFastRotations(new Piece(PYRAMID_STR)),
 			};
 		}
-		
-		
 		return Piece.pieces;
 	}
 	
@@ -200,19 +198,19 @@ public class Piece {
 	 and Piece.equals() to detect when the rotations have gotten us back
 	 to the first piece.
 	*/
-	private static Piece makeFastRotations(Piece root) {
+	private static Piece makeFastRotations(Piece root) { //只返回了一个piece,但要把这些piece用next链接起来
 		//The method makeFastRotations() should start with a single piece, 
 		//and create and wire together the whole list of its rotations around the given piece
-		root.next=root.computeNextRotation();
-		while(!root.next.equals(root)){
-			root.next=root.computeNextRotation();
-			root=root.next;
+		Piece node = root;
+		Piece firstRotate = node.computeNextRotation(); //first rotation of the root piece
+		while(!root.equals(root))
+		{  root.next = firstRotate;
+		   root = root.next;
+		   firstRotate = firstRotate.computeNextRotation();
 		}
-		return root; // YOUR CODE HERE
+		return node.computeNextRotation(); // YOUR CODE HERE
 	}
 	
-	
-
 	/**
 	 Given a string of x,y pairs ("0 0	0 1 0 2 1 0"), parses
 	 the points into a TPoint[] array.
