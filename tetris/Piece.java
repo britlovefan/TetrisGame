@@ -52,7 +52,8 @@ public class Piece {
 	/**
 	 Returns the width of the piece measured in blocks.
 	*/
-	public int getWidth() {
+	public int getWidth() { // width should be computed from body array
+		
 		return width;
 	}
 
