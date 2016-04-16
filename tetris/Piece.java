@@ -52,8 +52,19 @@ public class Piece {
 	/**
 	 Returns the width of the piece measured in blocks.
 	*/
-	public int getWidth() { // width should be computed from body array
-		
+	public int getWidth() { 
+		int len = body.length;
+		int min1 = body[0].x;
+		int max1 = Integer.MIN_VALUE;
+		for(int i =0;i<len;i++){
+			if(body[i].x < min1){
+				min1 = body[i].x;
+			}
+			if(body[i].x > max1){
+				max1 = body[i].x;
+			}
+		}
+		width = max1 - min1;
 		return width;
 	}
 
@@ -61,6 +72,18 @@ public class Piece {
 	 Returns the height of the piece measured in blocks.
 	*/
 	public int getHeight() {
+		int len = body.length;
+		int min1 = body[0].y;
+		int max1 = Integer.MIN_VALUE;
+		for(int i =0;i<len;i++){
+			if(body[i].y < min1){
+				min1 = body[i].y;
+			}
+			if(body[i].y > max1){
+				max1 = body[i].y;
+			}
+		}
+		height = max1 - min1;
 		return height;
 	}
 
@@ -79,6 +102,9 @@ public class Piece {
 	 The caller should not modify this array.
 	*/
 	public int[] getSkirt() {
+		for(int i= 0;i < width; i++){
+			
+		}
 		return skirt;
 	}
 
