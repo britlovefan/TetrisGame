@@ -168,14 +168,18 @@ public class Piece {
 		// (null will be false)
 		if (!(obj instanceof Piece)) return false;
 		Piece other = (Piece)obj;//construct a Piece object from obj
-		if(this.body.length!=other.body.length){
-			return false;
-		}
-		Set<TPoint> set = new HashSet<TPoint>(Arrays.asList(this.body));
-		for(int i=0;i<this.body.length;i++){
-			if(!set.contains(other.body[i])){
-				return false;
-			}
+		int count = 0;
+		for(int i=0;i<other.body.length;i++){
+			TPoint t1 = other.body[i];
+			for(int j =0;j <body.length;j++ ){
+			TPoint t2= body[j];
+			 if(t1.equals(t2)){
+				 count++;
+			 }
+		   }
+	 	}
+		if(count != body.length){
+			return true;
 		}
 		//Two Pieces are equal if they contain the same set of TPoint
 		return true;
@@ -183,9 +187,9 @@ public class Piece {
 
 
 	// String constants for the standard 7 tetris pieces
-	public static final String STICK_STR	= "0 0	0 1	 0 2  0 3";
-	public static final String L1_STR		= "0 0	0 1	 0 2  1 0";
-	public static final String L2_STR		= "0 0	1 0 1 1	 1 2";
+	public static final String STICK_STR	= "0 0  0 1	 0 2  0 3";
+	public static final String L1_STR		= "0 0  0 1	 0 2  1 0";
+	public static final String L2_STR		= "0 0	1 0  1 1  1 2";
 	public static final String S1_STR		= "0 0	1 0	 1 1  2 1";
 	public static final String S2_STR		= "0 1	1 1  1 0  2 0";
 	public static final String SQUARE_STR	= "0 0  0 1  1 0  1 1";

@@ -18,7 +18,7 @@ public class PieceTest {
 	// that can be used in tests.
 	private Piece pyr1, pyr2, pyr3, pyr4;
 	private Piece s, sRotated;
-    private Piece L1,L2,L1_f,L2_f;
+    private Piece L1,L2,L1_f,L2_f,L1_Same;
     private Piece[] A;
 	@Before
 	public void setUp() throws Exception {
@@ -32,11 +32,12 @@ public class PieceTest {
 		sRotated = s.computeNextRotation();
 		
         L1 = new Piece(Piece.L1_STR);
+        L1_Same = new Piece(Piece.L1_STR);
         L1_f = L1.computeNextRotation();
         L2 = new Piece(Piece.L2_STR);
         L2_f = L2.computeNextRotation();
         //first round rotation of the pieces
-		A =s.getPieces();
+		A =Piece.getPieces();
 		
 	}
 	
@@ -86,7 +87,7 @@ public class PieceTest {
 	// Test if the equal method is correct
 	@Test
 	public void testEqual(){
-		assertTrue(L1_f.equals(A[1]));
+		assertTrue(L1.equals(L1));
 		assertTrue(L2_f.equals(A[2]));
 		assertTrue(pyr1.equals(pyr3));
 		assertFalse(pyr1.equals(s));
