@@ -102,26 +102,25 @@ public class Piece {
 	 The caller should not modify this array.
 	*/
 	public int[] getSkirt() {
-		int[] arr = new int[width];
-		Map<Integer,Integer>map = new HashMap<Integer,Integer>();//index corresponding to the minimum value 
-		Map<Integer,Integer>sortMap = new TreeMap<Integer,Integer>(map);
-		for(int i= 0;i < body.length; i++){
-			int x = body[i].x;
-			int y = body[i].y;
+		int[] skirt1 = new int[this.getWidth()];
+		HashMap<Integer,Integer>map = new HashMap<Integer,Integer>();//index corresponding to the minimum value 
+		for(int i= 0;i < this.body.length; i++){
+			int x = this.body[i].x;
+			int y = this.body[i].y;
 			if(!map.containsKey(x)){
 				map.put(x,y);
 			}
-			else{
-				if(y < map.get(x)){ //if the value already exist but a smaller y is entered, update y
-				  map.put(x,y);
+			if(map.containsKey(x)){
+				if(y<map.get(x)){
+					map.put(x,y);
 				}
 			}
 		}
-		for(Integer i : sortMap.keySet()){
-			arr[i]=sortMap.get(i);
+		for(int i=0;i < this.getWidth();i++){
+			skirt1[i]=map.get(i);
 		}
-		skirt = arr;
-		return skirt;
+		skirt = skirt1;
+		return skirt1;
 	}
 
 	
@@ -129,14 +128,14 @@ public class Piece {
 	 Returns a new piece that is 90 degrees counter-clockwise
 	 rotated from the receiver.
 	 */
-	public Piece computeNextRotation() {
-		TPoint[] rotate_Body=new TPoint[body.length];
+	public Piece computeNextRotation() { 
+		TPoint[] rotate_Body=new TPoint[this.body.length];
 		Piece rotate_Piece=new Piece(rotate_Body);
-		for(int i=0;i<body.length;i++){
+		for(int i=0;i<this.body.length;i++){
 			//get the original x and y of the former 
-			int x=body[i].x;
-			int y=body[i].y;
-			rotate_Body[i]=new TPoint(width-y,x);
+			int x=this.body[i].x;
+			int y=this.body[i].y;
+			rotate_Body[i]=new TPoint(this.width-y,x);
 		}
 		return rotate_Piece; // YOUR CODE HERE
 	}
@@ -248,9 +247,10 @@ public class Piece {
 	private static Piece makeFastRotations(Piece root) { //只返回了一个piece,但要把这些piece用next链接起来
 		//The method makeFastRotations() should start with a single piece, 
 		//and create and wire together the whole list of its rotations around the given piece
+		Piece original = root;
 		Piece firstRotate = root.computeNextRotation(); 
-		Piece keep = firstRotate;//first rotation of the root piece
-		while(!firstRotate.equals(root))
+		Piece keep = firstRotate;
+		while(!firstRotate.equals(original))
 		{  root.next = firstRotate;
 		   root = firstRotate;
 		   firstRotate = firstRotate.computeNextRotation();

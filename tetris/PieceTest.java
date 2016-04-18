@@ -16,8 +16,8 @@ public class PieceTest {
 	// For example, the code below sets up some
 	// pyramid and s pieces in instance variables
 	// that can be used in tests.
-	private Piece pyr1, pyr2, pyr3, pyr4,pyr5;
-	private Piece s, sRotated;
+	private Piece pyr1, pyr2, pyr3, pyr4,pyr5,Square;
+	private Piece s, sRotated,SquareRotated;
     private Piece L1,L2,L1_f,L2_f,L1_Same;
     private Piece[] A;
 	@Before
@@ -30,6 +30,9 @@ public class PieceTest {
 		pyr5 = pyr3.computeNextRotation();
 		s = new Piece(Piece.S1_STR);
 		sRotated = s.computeNextRotation();
+		
+		Square = new Piece(Piece.SQUARE_STR);
+		SquareRotated = Square.computeNextRotation();
 		
         L1 = new Piece(Piece.L1_STR);
         L1_Same = new Piece(Piece.L1_STR);
@@ -80,10 +83,14 @@ public class PieceTest {
 		// Note must use assertTrue(Arrays.equals(... as plain .equals does not work
 		// right for arrays.
 		assertTrue(Arrays.equals(new int[] {0, 0, 0}, pyr1.getSkirt()));
-		assertTrue(Arrays.equals(new int[] {1, 0, 1}, pyr3.getSkirt()));
 		assertTrue(Arrays.equals(new int[] {0, 0, 1}, s.getSkirt()));
+		assertTrue(Arrays.equals(new int[] {0, 0}, L1.getSkirt()));
 		assertTrue(Arrays.equals(new int[] {1, 0}, sRotated.getSkirt()));
+		assertTrue(Arrays.equals(new int[] {1, 0, 1}, pyr3.getSkirt()));
+		
+		
 	}
+	
 	// Test if the equal method is correct
 	@Test
 	public void testEqual(){ // The A[]array computes the first round rotation
@@ -91,7 +98,8 @@ public class PieceTest {
 		assertTrue(L2_f.equals(A[2]));
 		assertTrue(pyr2.equals(A[6]));
 		assertTrue(pyr3.equals(A[6].computeNextRotation()));
-		assertTrue(L2_f.computeNextRotation().equals(A[2].fastRotation()));
+		assertTrue(L2_f.computeNextRotation().equals(A[2].fastRotation()));//test fast Rotation
 		assertFalse(pyr1.equals(A[5]));
+		assertTrue(Square.computeNextRotation().equals(A[5]));
 	}
 }
