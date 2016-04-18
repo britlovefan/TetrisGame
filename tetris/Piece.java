@@ -179,7 +179,7 @@ public class Piece {
 		   }
 	 	}
 		if(count != body.length){
-			return true;
+			return false;
 		}
 		//Two Pieces are equal if they contain the same set of TPoint
 		return true;
@@ -187,9 +187,9 @@ public class Piece {
 
 
 	// String constants for the standard 7 tetris pieces
-	public static final String STICK_STR	= "0 0  0 1	 0 2  0 3";
-	public static final String L1_STR		= "0 0  0 1	 0 2  1 0";
-	public static final String L2_STR		= "0 0	1 0  1 1  1 2";
+	public static final String STICK_STR	= "0 0	0 1	 0 2  0 3";
+	public static final String L1_STR		= "0 0	0 1	 0 2  1 0";
+	public static final String L2_STR		= "0 0	1 0 1 1	 1 2";
 	public static final String S1_STR		= "0 0	1 0	 1 1  2 1";
 	public static final String S2_STR		= "0 1	1 1  1 0  2 0";
 	public static final String SQUARE_STR	= "0 0  0 1  1 0  1 1";
@@ -248,14 +248,14 @@ public class Piece {
 	private static Piece makeFastRotations(Piece root) { //只返回了一个piece,但要把这些piece用next链接起来
 		//The method makeFastRotations() should start with a single piece, 
 		//and create and wire together the whole list of its rotations around the given piece
-		Piece node = root;
-		Piece firstRotate = node.computeNextRotation(); //first rotation of the root piece
-		while(!root.equals(root))
+		Piece firstRotate = root.computeNextRotation(); 
+		Piece keep = firstRotate;//first rotation of the root piece
+		while(!firstRotate.equals(root))
 		{  root.next = firstRotate;
-		   root = root.next;
+		   root = firstRotate;
 		   firstRotate = firstRotate.computeNextRotation();
 		}
-		return node.computeNextRotation(); // YOUR CODE HERE
+		return keep; // YOUR CODE HERE
 	}
 	
 	/**

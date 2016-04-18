@@ -16,7 +16,7 @@ public class PieceTest {
 	// For example, the code below sets up some
 	// pyramid and s pieces in instance variables
 	// that can be used in tests.
-	private Piece pyr1, pyr2, pyr3, pyr4;
+	private Piece pyr1, pyr2, pyr3, pyr4,pyr5;
 	private Piece s, sRotated;
     private Piece L1,L2,L1_f,L2_f,L1_Same;
     private Piece[] A;
@@ -27,7 +27,7 @@ public class PieceTest {
 		pyr2 = pyr1.computeNextRotation();
 		pyr3 = pyr2.computeNextRotation();
 		pyr4 = pyr3.computeNextRotation();
-		
+		pyr5 = pyr3.computeNextRotation();
 		s = new Piece(Piece.S1_STR);
 		sRotated = s.computeNextRotation();
 		
@@ -86,11 +86,12 @@ public class PieceTest {
 	}
 	// Test if the equal method is correct
 	@Test
-	public void testEqual(){
-		assertTrue(L1.equals(L1));
+	public void testEqual(){ // The A[]array computes the first round rotation
+		assertTrue(L1.equals(L1_Same));
 		assertTrue(L2_f.equals(A[2]));
-		assertTrue(pyr1.equals(pyr3));
-		assertFalse(pyr1.equals(s));
+		assertTrue(pyr2.equals(A[6]));
+		assertTrue(pyr3.equals(A[6].computeNextRotation()));
+		assertTrue(L2_f.computeNextRotation().equals(A[2].fastRotation()));
 		assertFalse(pyr1.equals(A[5]));
 	}
 }
