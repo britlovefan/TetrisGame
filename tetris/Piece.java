@@ -64,7 +64,7 @@ public class Piece {
 				max1 = body[i].x;
 			}
 		}
-		width = max1 - min1;
+		width = max1 - min1 + 1;
 		return width;
 	}
 
@@ -83,7 +83,7 @@ public class Piece {
 				max1 = body[i].y;
 			}
 		}
-		height = max1 - min1;
+		height = max1 - min1+1;
 		return height;
 	}
 
@@ -102,9 +102,25 @@ public class Piece {
 	 The caller should not modify this array.
 	*/
 	public int[] getSkirt() {
-		for(int i= 0;i < width; i++){
-			
+		int[] arr = new int[width];
+		Map<Integer,Integer>map = new HashMap<Integer,Integer>();//index corresponding to the minimum value 
+		Map<Integer,Integer>sortMap = new TreeMap<Integer,Integer>(map);
+		for(int i= 0;i < body.length; i++){
+			int x = body[i].x;
+			int y = body[i].y;
+			if(!map.containsKey(x)){
+				map.put(x,y);
+			}
+			else{
+				if(y < map.get(x)){ //if the value already exist but a smaller y is entered, update y
+				  map.put(x,y);
+				}
+			}
 		}
+		for(Integer i : sortMap.keySet()){
+			arr[i]=sortMap.get(i);
+		}
+		skirt = arr;
 		return skirt;
 	}
 
