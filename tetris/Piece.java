@@ -35,7 +35,7 @@ public class Piece {
 	 Makes its own copy of the array and the TPoints inside it.
 	*/
 	public Piece(TPoint[] points) {
-       body=points;
+       this.body=points;
 	}
 	
 
@@ -129,14 +129,14 @@ public class Piece {
 	 rotated from the receiver.
 	 */
 	public Piece computeNextRotation() { 
-		TPoint[] rotate_Body=new TPoint[this.body.length];
-		Piece rotate_Piece=new Piece(rotate_Body);
-		for(int i=0;i<this.body.length;i++){
+		TPoint[] rotate_Body=new TPoint[body.length];
+		for(int i=0;i<body.length;i++){
 			//get the original x and y of the former 
-			int x=this.body[i].x;
-			int y=this.body[i].y;
-			rotate_Body[i]=new TPoint(this.width-y,x);
+			int x=body[i].x;
+			int y=body[i].y;
+			rotate_Body[i]=new TPoint(this.getHeight()-1-y,x);
 		}
+		Piece rotate_Piece=new Piece(rotate_Body);
 		return rotate_Piece; // YOUR CODE HERE
 	}
 
@@ -193,7 +193,7 @@ public class Piece {
 	public static final String S2_STR		= "0 1	1 1  1 0  2 0";
 	public static final String SQUARE_STR	= "0 0  0 1  1 0  1 1";
 	public static final String PYRAMID_STR	= "0 0  1 0  1 1  2 0";
-	
+	public static final String ROTATE = "1 0	1 1	 0 1  0 2";
 	// Indexes for the standard 7 pieces in the pieces array
 	public static final int STICK = 0;
 	public static final int L1	  = 1;

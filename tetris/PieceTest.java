@@ -17,7 +17,7 @@ public class PieceTest {
 	// pyramid and s pieces in instance variables
 	// that can be used in tests.
 	private Piece pyr1, pyr2, pyr3, pyr4,pyr5,Square;
-	private Piece s, sRotated,SquareRotated;
+	private Piece s, sRotated,SquareRotated,S1_ROTATE;
     private Piece L1,L2,L1_f,L2_f,L1_Same;
     private Piece[] A;
 	@Before
@@ -35,7 +35,7 @@ public class PieceTest {
 		SquareRotated = Square.computeNextRotation();
 		
         L1 = new Piece(Piece.L1_STR);
-        L1_Same = new Piece(Piece.L1_STR);
+        S1_ROTATE = new Piece(Piece.ROTATE);
         L1_f = L1.computeNextRotation();
         L2 = new Piece(Piece.L2_STR);
         L2_f = L2.computeNextRotation();
@@ -94,12 +94,12 @@ public class PieceTest {
 	// Test if the equal method is correct
 	@Test
 	public void testEqual(){ // The A[]array computes the first round rotation
-		assertTrue(L1.equals(L1_Same));
+		assertTrue(S1_ROTATE.equals(sRotated));
 		assertTrue(L2_f.equals(A[2]));
 		assertTrue(pyr2.equals(A[6]));
 		assertTrue(pyr3.equals(A[6].computeNextRotation()));
 		assertTrue(L2_f.computeNextRotation().equals(A[2].fastRotation()));//test fast Rotation
 		assertFalse(pyr1.equals(A[5]));
-		assertTrue(Square.computeNextRotation().equals(A[5]));
+		assertTrue(Square.computeNextRotation().equals(Square));
 	}
 }
